@@ -7,4 +7,6 @@
 
 void dims(const uint8_t *str, size_t len, size_t *nodes, uint64_t *arcs);
 
+void neighborhood(const uint8_t *str, size_t len, size_t node_id, size_t *neighborhood, size_t *n);
+
 #endif  /* webgraphclibrs_h */

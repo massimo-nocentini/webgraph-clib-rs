@@ -38,3 +38,33 @@ pub extern "C" fn dims(str: *const u8, len: size_t, nodes: *mut size_t, arcs: *m
         }
     }
 }
+
+#[unsafe(no_mangle)]
+pub extern "C" fn neighborhood(
+    str: *const u8,
+    len: size_t,
+    node_id: size_t,
+    neighborhood: *mut size_t,
+    n: *mut size_t,
+) {
+    let graph_filename = from_char_buff(str, len).unwrap();
+    let graph = BvGraph::with_basename(graph_filename).load().unwrap();
+
+    let mut neighborhood_vec = Vec::new();
+
+    for node in graph.successors(node_id) {
+        neighborhood_vec.push(node);
+    }
+
+    unsafe {
+        if !neighborhood.is_null() {
+            for (i, &node) in neighborhood_vec.iter().enumerate() {
+                *neighborhood.add(i) = node;
+            }
+        }
+
+        if !n.is_null() {
+            *n = neighborhood_vec.len();
+        }
+    }
+}
