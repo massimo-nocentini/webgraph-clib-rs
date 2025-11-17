@@ -22,7 +22,7 @@ fn from_char_buff<'a>(ptr: *const u8, len: size_t) -> Option<&'a str> {
 }
 
 #[unsafe(no_mangle)]
-pub extern "C" fn a(str: *const u8, len: size_t, nodes: *mut size_t, arcs: *mut u64) {
+pub extern "C" fn dims(str: *const u8, len: size_t, nodes: *mut size_t, arcs: *mut u64) {
     let graph_filename = from_char_buff(str, len).unwrap();
     let graph = BvGraph::with_basename(graph_filename).load().unwrap();
 

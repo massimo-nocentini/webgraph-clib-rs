@@ -5,6 +5,6 @@
 
 #include <stdint.h>
 
-void a(const uint8_t *str, size_t len, size_t *nodes, uint64_t *arcs);
+void dims(const uint8_t *str, size_t len, size_t *nodes, uint64_t *arcs);
 
 #endif  /* webgraphclibrs_h */
